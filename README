@@ -1,0 +1,74 @@
+/* ---- Taner MUSTAFA ---- 325 CB ---- Analiza Algoritmilor ---- Tema 2 ----*/
+
+	Implementarea & complexitatea temei:
+
+
+	Transformarea HCP -> SAT a fost dedusa din exemplul dat in cerinta si din 
+fisierele de referinta. Astfel, descriu algoritmul si implementarea lui:
+
+
+	Am constatat 3 "categorii" de ecuatii:
+
+		1. Testeaza daca prin oricare nod se trece de exact 2 ori si daca exista 
+	o cale de la nodul 1 la acesta, de maxim N/2+1 distanta. In caz contrar, 
+	rezultatul este, cu siguranta, FALS.
+
+		2. Testeaza daca parcurgerea drumului dintre 2 noduri este la fel pe 
+	ambele sensuri (adevarata sau falsa).
+	(probabil este utila pentru HCP cu grafuri orientate).
+
+		3. Verifica pentru fiecare 2 noduri distanta si adiacenta acestora.
+	Am impartit aceasta categorie in 2 grupe: prima care verifica nodurile de 
+	distanta 1, iar a doua, nodurile de distanta minim 2 (distanta = nr. de
+	muchii care trebuie parcurse pentru a se ajunge din nodul 1 in nodul crt).
+
+
+	Implementarea & complexitatea categoriei 1:
+
+		Pentru fiecare nod in parte se verifica daca are vecini. Daca nu are, se
+	trece mai departe, iar raspunsul va fi cu certitudine FALS. Daca are un vecin,
+	se printeaza variabila corespunzatoare.
+		Daca are mai multi vecini, prin intermediul a 3 "for"-uri se realizeaza
+	fiecare aranjament posibil de vecini, astfel incat toti in afara de primii 
+	2 sa fie negati.
+		Pentru nodurile mai mari decat 1, se testeaza si distanta de la 1 la 
+	acestea, printandu-se printr-un singur "for" toate variabilele "ai-j".
+
+	COMPLEXITATE: Se observa ca fiecare "for" din aceasta categorie se duce de 
+	la 1 la N sau la N/2+1. Cum maximul de "for"-uri unul in altul este 4,
+	rezulta ca aceasta categorie are complexitate maxim O(n^4) = polinomiala.
+
+
+	Implementarea & complexitatea categoriei 2:
+
+		Pentru fiecare nod in parte se iau toti vecinii pe rand si se printeaza 
+	ecuatia care testeaza daca trecerea este ori adevarat, ori falsa pe ambele 
+	sensuri.
+
+	COMPLEXITATE: Sunt 2 "for"-uri cu lungime de la 1 la N, deci complexitatea 
+	este O(n^2) = polinomiala.
+
+
+	Implementarea & complexitatea categoriei 3:
+
+		Pentru fiecare nod se verifica daca ori ii este adiacent lui 1, ori 
+	distanta intre ele nu este 1.
+		Apoi, pentru fiecare distanta posibila pana la N/2+1, se testeaza daca 
+	ori aceasta este distanta intre nodul 1 si fiecare nod in parte, ori exista 
+	un nod intermediar adiacent celui cautat, la care se ajunge de la 1 intr-un 
+	numar de pasi cu o unitate mai mic decat cel cautat. 
+		Pe scurt, se testeaza prin ce noduri si in ce numar de pasi se ajunge 
+	de la nodul 1 la fiecare nod in parte.
+
+	COMPLEXITATE: Se observa ca fiecare "for" din aceasta categorie se duce de 
+	la 1 la N sau la N/2+1. Cum maximul de "for"-uri unul in altul este 3,
+	rezulta ca aceasta categorie are complexitate maxim O(n^3) = polinomiala.
+
+
+	CONCLUZIE:
+		Impartita in 3 categorii de complexitate O(n^4), O(n^2), respectiv 
+	O(n^3), adunandu-le, rezulta ca transformarea HCP -> SAT este de complexitate 
+	POLINOMIALA.
+
+
+
